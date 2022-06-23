@@ -1,17 +1,47 @@
 import React from 'react';
 import s from './CategoriesFilter.module.scss';
 
-const CategoriesFilter = () => {
+const CategoriesFilter = ({ filterCategory }) => {
   return (
     <div className={s.categoriesFilter}>
       <ul className={s.categoriesFilter_list}>
-        <li className={s.categoriesFilter_list_item}>Show All</li>
-        <li className={s.categoriesFilter_list_item}>Design</li>
-        <li className={s.categoriesFilter_list_item}>Branding</li>
-        <li className={s.categoriesFilter_list_item}>Illustration</li>
-        <li className={s.categoriesFilter_list_item}>Motion</li>
+        <li
+          onClick={(e) => filterCategory(e.target.innerHTML)}
+          className={s.categoriesFilter_list_item}
+        >
+          Show All
+        </li>
+        <li
+          onClick={(e) => filterCategory(e.target.innerHTML)}
+          className={s.categoriesFilter_list_item}
+        >
+          Design
+        </li>
+        <li
+          onClick={(e) => filterCategory(e.target.innerHTML)}
+          className={s.categoriesFilter_list_item}
+        >
+          Branding
+        </li>
+        <li
+          onClick={(e) => filterCategory(e.target.innerHTML)}
+          className={s.categoriesFilter_list_item}
+        >
+          Illustration
+        </li>
+        <li
+          onClick={(e) => filterCategory(e.target.innerHTML)}
+          className={s.categoriesFilter_list_item}
+        >
+          Motion
+        </li>
       </ul>
-      <select className={s.categoriesFilter_select} name='cars' id='cars'>
+      <select
+        onChange={(e) => filterCategory(e.target.value)}
+        className={s.categoriesFilter_select}
+        name='cars'
+        id='cars'
+      >
         <option value='Show All'>Show All</option>
         <option value='Design'>Design</option>
         <option value='Branding'>Branding</option>
