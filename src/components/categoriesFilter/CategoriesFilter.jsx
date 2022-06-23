@@ -12,10 +12,11 @@ const CategoriesFilter = () => {
         <li className={s.categoriesFilter_list_item}>Motion</li>
       </ul>
       <select className={s.categoriesFilter_select} name='cars' id='cars'>
-        <option value='volvo'>Show All</option>
-        <option value='saab'>Design</option>
-        <option value='mercedes'>Branding</option>
-        <option value='audi'>Motion</option>
+        <option value='Show All'>Show All</option>
+        <option value='Design'>Design</option>
+        <option value='Branding'>Branding</option>
+        <option value='Illustration'>Illustration</option>
+        <option value='Motion'>Motion</option>
       </select>
       <span className={s.categoriesFilter_select_arrow}>▼</span>
     </div>
