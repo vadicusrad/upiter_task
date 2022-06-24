@@ -14,6 +14,20 @@ const Content = () => {
     fetchItems();
   }, [currentFilter]);
 
+  useEffect(() => {
+    window.addEventListener('keydown', onDelHandler);
+    return () => {
+      window.removeEventListener('keydown', onDelHandler);
+    };
+  }, []);
+
+  const onDelHandler = (e) => {
+    if (e.key === 'Delete') {
+      console.log(e, 'Key pressed.');
+      setItems(items.filter((item) => item.target !== true));
+    }
+  };
+
   async function fetchItems() {
     try {
       await fetch(
@@ -37,20 +51,42 @@ const Content = () => {
   function filterCategory(currentCategory) {
     setCurrentFilter(currentCategory);
   }
-
+  function targetElement(id) {
+    const newItems = items.map((item) => {
+      if (item.id === id) {
+        item.target = !item.target;
+        return item;
+      }
+      item.target = false;
+      return item;
+    });
+    setItems(newItems);
+  }
   return (
     <div className={s.content}>
       <CategoriesFilter filterCategory={filterCategory} />
       <ul className={s.content_list}>
         {items &&
-          items.map((item, index) => (
-            <li key={index} className={s.content_item}>
+          items.map((item) => (
+            <li
+              onClick={() => targetElement(item.id)}
+              key={item.id}
+              className={s.content_item}
+              style={
+                item.target
+                  ? { boxShadow: '0px 0px 0px 7px rgba(81, 204, 90, 1)' }
+                  : null
+              }
+            >
               <img
                 className={s.content_item_img}
                 src={item.avatar}
                 alt={item.title}
               />
-              <button className={s.content_item_category}>
+              <button
+                onClick={() => filterCategory(item.category)}
+                className={s.content_item_category}
+              >
                 {item.category}
               </button>
               <h2 className={s.content_item_title}>{item.title}</h2>
